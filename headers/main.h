@@ -7,10 +7,11 @@
 
 #include "parse.h"
 #include "primitives.h"
+#include "timer.h"
 
 
 #define DEFAULT_NUM_THREADS     4
-#define MAIN_THREAD             numThreads
+#define MAIN_THREAD             threadsRequested
 
 
 /* Quality-of-life type definitions */
@@ -19,14 +20,11 @@ typedef std::pair<int, int> Range;
 
 
 /* Global Concurrency Variables */
-static int numThreads;
+static int threadsRequested;
 static std::vector<std::thread*> workers;
 
 /* Global Timing Variables */
-static timespec                     startTime;
-static timespec                     endTime;
-static unsigned long long           epochNs;
-static unsigned long long           epochSec;
+static Timer algTimer;
 
 
 /* Forward Function Declarations */
@@ -37,13 +35,6 @@ namespace mythread
     void cleanup(void);
     void threadMain(int threadID);
 }
-namespace myglobals
-{
-    void init(void);
-    void cleanup(void);
-    void printRunTime(void);
-}
-
 
 
 namespace mythread
@@ -51,12 +42,12 @@ namespace mythread
     void fork(void)
     {
         // resize the worker vector
-        workers.resize(numThreads - 1);
+        workers.resize(threadsRequested - 1);
 
         // Create barriers for worker threads and the main thead
         // bar = new std::barrier<>(numThreads + 1);
 
-        for(int threadIdx = 0; threadIdx < numThreads - 1; threadIdx++)
+        for(int threadIdx = 0; threadIdx < threadsRequested - 1; threadIdx++)
         {
             // std::cout << "Created Thread: " << threadIdx << std::endl;
             workers[threadIdx] = new std::thread(threadMain, threadIdx);
@@ -66,7 +57,7 @@ namespace mythread
 
     void join(void)
     {
-        for(int i = 0; i < numThreads - 1; i++)
+        for(int i = 0; i < threadsRequested - 1; i++)
         {
             // std::cout << "Joined Thread: " << i << std::endl;
             workers[i]->join();
@@ -78,7 +69,7 @@ namespace mythread
     {
         // delete bar;
 
-        for(int i = 0; i < numThreads - 1; i++)
+        for(int i = 0; i < threadsRequested - 1; i++)
         {
             // std::cout << "Deleted Thread: " << i << std::endl;
             delete workers[i];
@@ -95,7 +86,7 @@ namespace mythread
 
         if(threadID == MAIN_THREAD)
         {
-            clock_gettime(CLOCK_MONOTONIC, &startTime);
+           algTimer.setStartTime();
         }
 
         // Distribute ranges for threads to work on
@@ -111,33 +102,10 @@ namespace mythread
         {
             // Sort the now-sorted ranges
             // sort::quickSort(sortedValues, 0, sortedValues->size() - 1);
-            clock_gettime(CLOCK_MONOTONIC, &endTime);
+            algTimer.setEndTime();
         }
     }
 }
 
-
-namespace myglobals
-{
-    void init(void)
-    {
-        startTime.tv_nsec   = 0;
-        startTime.tv_sec    = 0;
-        endTime.tv_nsec     = 0;
-        endTime.tv_sec      = 0;
-    }
-
-    void printRunTime(void)
-    {
-        // Calculate runtime
-        epochNs = (endTime.tv_sec - startTime.tv_sec) * 1000000000 + (endTime.tv_nsec - startTime.tv_nsec);
-        epochSec = static_cast<double>(epochNs) / 1000000000.0;
-
-        // Print runtime
-        std::cout << "BucketSort Complete:\n";
-        std::cout << "Runtime: " << epochNs << "ns\n";
-        std::cout << "Runtime: " << epochSec << "sec\n";
-    }
-}
 
 #endif  /* MAIN_H */

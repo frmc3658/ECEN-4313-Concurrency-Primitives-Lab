@@ -31,6 +31,10 @@ class Parse
         void writeSortedValues(void);
         void printName(void);
         void printHelpFile(void);
+
+
+        /* Accessor helper functions */
+        int getNumThreads(void) const { return numThreads; }
     
         /* Modifer helper functions */
         inline void setBarRequest(std::string req) { barRequest = req; }

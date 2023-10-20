@@ -81,8 +81,7 @@ void Parse::parseCMD(int argc, char* argv[])
 void Parse::parseInputFile(std::vector<int>*& storage)
 {
     storage = new std::vector<int>;
-    std::string path = inputPath;
-    std::ifstream file(path);
+    std::ifstream file(inputPath);
 
     try
     {

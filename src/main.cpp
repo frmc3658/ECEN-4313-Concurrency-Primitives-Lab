@@ -11,10 +11,10 @@ int main(int argc, char* argv[])
     parser.validateArgc(argc);
     parser.parseCMD(argc, argv);
 
-    // Set number of threads
-
+    threadsRequested = parser.getNumThreads();
 
     // Parse input file
+    parser.parseInputFile(sortedValues);
 
     // Fork
 
@@ -25,6 +25,7 @@ int main(int argc, char* argv[])
     // Thread cleanup
 
     // Calculate runtime
+    algTimer.printRuntime();
 
     // Write the sorted values to output file
 
