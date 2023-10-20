@@ -5,6 +5,7 @@
 #include <thread>
 #include <vector>
 
+#include "parse.h"
 #include "primitives.h"
 
 

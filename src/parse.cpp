@@ -29,7 +29,7 @@ void Parse::validateArgc(int argc)
 }
 
 
-void Parse::parseCMD(int argc, char* argv[], cmdLine& cmd)
+void Parse::parseCMD(int argc, char* argv[])
 {
     while(true)
     {
@@ -40,28 +40,28 @@ void Parse::parseCMD(int argc, char* argv[], cmdLine& cmd)
 
         switch(option)
         {
-            case 'i':
-                cmd.inputPath = (std::string)optarg;
-                break;
-            case 'o':
-                cmd.outputPath = (std::string)optarg;
-                break;
             case 'b':
-                cmd.barRequest = (std::string)optarg;
-                break;
-            case 'l':
-                cmd.lockRequest = (std::string)optarg;
-                break;
-            case 't':
-                cmd.numThreads = std::stoi(optarg);
+                setBarRequest((std::string)optarg);
                 break;
             case 'h':
                 printHelpFile();
                 exit(EXIT_SUCCESS);
                 break;
+            case 'i':
+                setInputPath((std::string)optarg);
+                break;
+            case 'l':
+                setLockRequest((std::string)optarg);
+                break;
             case 'n':
                 printName();
                 exit(EXIT_SUCCESS);
+                break;
+            case 'o':
+                setOutputPath((std::string)optarg);
+                break;
+            case 't':
+                setNumThreads(std::stoi(optarg));
                 break;
             case '?':
                 try
@@ -78,7 +78,7 @@ void Parse::parseCMD(int argc, char* argv[], cmdLine& cmd)
 }
 
 
-void Parse::parseInputFile(std::vector<int>*& storage, cmdLine &cmd)
+void Parse::parseInputFile(std::vector<int>*& storage)
 {
     storage = new std::vector<int>;
     std::string path = cmd.inputPath;
@@ -108,7 +108,7 @@ void Parse::parseInputFile(std::vector<int>*& storage, cmdLine &cmd)
 }
 
 
-void Parse::writeSortedValues(cmdLine& cmd)
+void Parse::writeSortedValues(void)
 {
     std::ofstream outFile(cmd.outputPath);
 

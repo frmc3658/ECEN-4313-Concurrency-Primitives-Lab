@@ -1,15 +1,18 @@
 #include "../headers/main.h"
 
 
-/* Global Command Line Variables */
 std::vector<int>* sortedValues;
 
 
 int main(int argc, char* argv[])
 {
-    // Validate Command Line Arguements   
+    // Validate Command Line Arguements
+    Parse parser;
+    parser.validateArgc(argc);
+    parser.parseCMD(argc, argv);
 
     // Set number of threads
+
 
     // Parse input file
 
