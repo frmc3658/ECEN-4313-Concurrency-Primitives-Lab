@@ -15,11 +15,9 @@ class Parse
 {
     private:
         std::string     barRequest;
-        std::ifstream   inputFile;
         std::string     inputPath;
         std::string     lockRequest;
         int             numThreads;
-        std::ofstream   outputFile;
         std::string     outputPath;
 
     public:
