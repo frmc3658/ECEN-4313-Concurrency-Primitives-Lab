@@ -35,6 +35,16 @@ namespace primitive
             virtual void lock(void) = 0;
             virtual void unlock(void) = 0;
     };
+
+
+    enum class lockTypes : int
+    {
+        mcslock,
+        pthreadlock,
+        taslock,
+        ttaslock,
+        ticketlock
+    };
 }
 
 

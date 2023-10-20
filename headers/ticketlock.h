@@ -16,9 +16,7 @@ namespace primitive
             virtual ~TicketLock();
 
             void lock(void) override;
-            void unlock(void) override;
-
-        
+            void unlock(void) override;        
     };
 }
 

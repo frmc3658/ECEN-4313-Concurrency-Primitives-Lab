@@ -1,32 +1,33 @@
 #include "../headers/main.h"
 
 
+/* Global Command Line Variables */
+std::vector<int>* sortedValues;
+
 
 int main(int argc, char* argv[])
 {
-    // Validate Command Line Arguements
-    parse::validateArgc(argc);
-    parse::parseCMD(argc, argv, cmd);
+    // Validate Command Line Arguements   
 
     // Set number of threads
-    myglobals::setNumThreads(cmd);
 
     // Parse input file
-    parse::parseInputFile(sortedValues, cmd);
 
-    // Execute using fork/join parallelism
-    mythread::fork();
-    mythread::threadMain(MAIN_THREAD);
-    mythread::join();
-    mythread::cleanup();
+    // Fork
+
+    // ThreadMain
+
+    // Join
+
+    // Thread cleanup
 
     // Calculate runtime
-    myglobals::printRunTime();
 
     // Write the sorted values to output file
-    parse::writeSortedValues(cmd);
 
-    myglobals::cleanup();
+    // Cleanup
+    delete sortedValues;
+    sortedValues->clear();
 
     return 0;
 }
