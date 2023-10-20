@@ -1,0 +1,10 @@
+
+Usage: mysort [--name] [-i source.txt] [-o out.txt] [-t NUM_THREADS] [--bar=<sense,pthread>] [--lock=<tas, ttas, ticket, mcs, pthread, petersonseq, petersonrel>]
+Options:
+    --bar       Specifies the type of barrier to use
+    -i          Input text file containing the values to sort
+    --lock      Specifes the type of lock to use
+    --name      Prints Author's name
+    -o          Output file to write out the sorted values
+    -t          Number of thead to run the algorithm with (Defaults to 4)
+
