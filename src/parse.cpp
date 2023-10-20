@@ -81,7 +81,7 @@ void Parse::parseCMD(int argc, char* argv[])
 void Parse::parseInputFile(std::vector<int>*& storage)
 {
     storage = new std::vector<int>;
-    std::string path = cmd.inputPath;
+    std::string path = inputPath;
     std::ifstream file(path);
 
     try
@@ -110,7 +110,7 @@ void Parse::parseInputFile(std::vector<int>*& storage)
 
 void Parse::writeSortedValues(void)
 {
-    std::ofstream outFile(cmd.outputPath);
+    std::ofstream outFile(outputPath);
 
     try
     {
@@ -120,7 +120,7 @@ void Parse::writeSortedValues(void)
         }
         else
         {
-            std::cout << "Writing Sorted Values to: " << cmd.outputPath << std::endl;
+            std::cout << "Writing Sorted Values to: " << outputPath << std::endl;
 
             for(size_t i = 0; i < sortedValues->size(); i++)
             {
