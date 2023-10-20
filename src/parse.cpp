@@ -29,6 +29,67 @@ void Parse::validateArgc(int argc)
 }
 
 
+primitive::Bar* Parse::selectBarrierType(void)
+{
+    primitive::Bar* bar;
+
+    if(barRequest == "pthread")
+    {
+        bar = new primitive::StdBar(numThreads);
+    }
+    else if(barRequest == "sense")
+    {
+        bar = new primitive::SenseBar(numThreads);
+    }
+    else /* berRequest == "senserel" */
+    {
+        // Not yet implemented
+        bar = nullptr;
+    }
+
+    return bar;
+}
+
+
+primitive::Lock* Parse::selectLockType(void)
+{
+    primitive::Lock* lk;
+
+    if(lockRequest == "mcs")
+    {
+        lk = new primitive::MCSLock();
+    }
+    else if(lockRequest == "petersonrel")
+    {
+        // Not yet implemented
+        lk = nullptr;
+    }
+    else if(lockRequest == "petersonseq")
+    {
+        // Not yet implemented
+        lk = nullptr;
+    }
+    else if(lockRequest == "pthread")
+    {
+        lk = new primitive::MutexLock();
+    }
+    else if(lockRequest == "tas")
+    {
+        lk = new primitive::TASLock();
+    }
+    else if(lockRequest == "ticket")
+    {
+        lk = new primitive::TicketLock();
+    }
+    else /* lockRequest == "ttas" */
+    {
+        lk = new primitive::TTASLock();
+    }
+
+    return lk;
+}
+
+
 void Parse::parseCMD(int argc, char* argv[])
 {
     while(true)

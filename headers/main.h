@@ -22,6 +22,8 @@ typedef std::pair<int, int> Range;
 /* Global Concurrency Variables */
 static int threadsRequested;
 static std::vector<std::thread*> workers;
+extern primitive::Bar* bar;
+extern primitive::Lock* lk;
 
 /* Global Timing Variables */
 static Timer algTimer;
@@ -82,7 +84,7 @@ namespace mythread
     void threadMain(int threadID)
     {
         // Synchronize worker and main threads
-        // bar->arrive_and_wait();
+        bar->wait();
 
         if(threadID == MAIN_THREAD)
         {
@@ -95,7 +97,7 @@ namespace mythread
         // Sort the range
         // sort::quickSort(sortedValues, sortRange.first, sortRange.second);
 
-        // bar->arrive_and_wait();
+        bar->wait();
 
         // Contents of the ranges have been sorted, sort the ranges themselves
         if(threadID == MAIN_THREAD)

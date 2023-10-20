@@ -8,6 +8,12 @@ namespace primitive
     }
 
 
+    StdBar::StdBar(int numThreads)
+    {
+        init(numThreads);
+    }
+
+
     StdBar::~StdBar()
     {
         delete bar;

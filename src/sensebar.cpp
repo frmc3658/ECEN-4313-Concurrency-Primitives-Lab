@@ -8,6 +8,12 @@ namespace primitive
     }
 
 
+    SenseBar::SenseBar(int num_threads)
+    {
+        numThreads = num_threads;
+    }
+
+
     SenseBar::~SenseBar()
     {
 

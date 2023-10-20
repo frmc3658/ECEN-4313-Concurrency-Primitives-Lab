@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 
+#include "primitives.h"
 
 extern std::vector<int>* sortedValues;
 
@@ -27,6 +28,8 @@ class Parse
         /* Interface functions */
         void validateArgc(int argc);
         void parseCMD(int argc, char* argv[]);
+        primitive::Bar* selectBarrierType(void);
+        primitive::Lock* selectLockType(void);
         void parseInputFile(std::vector<int>*& storage);
         void writeSortedValues(void);
         void printName(void);

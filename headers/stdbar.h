@@ -15,6 +15,7 @@ namespace primitive
         
         public:
             StdBar();
+            StdBar(int numThreads);
             ~StdBar();
 
             void init(int numThreads) override;

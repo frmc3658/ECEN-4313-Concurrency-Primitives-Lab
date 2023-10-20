@@ -12,9 +12,11 @@ namespace primitive
         private:
             std::atomic<int> count;
             std::atomic<int> sense;
+            int numThreads;
 
         public:
             SenseBar();
+            SenseBar(int num_threads);
             ~SenseBar();
 
             void init(int num_threads) override;
