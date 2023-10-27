@@ -35,15 +35,23 @@ primitive::Bar* Parse::selectBarrierType(void)
 
     if(barRequest == "pthread")
     {
+        std::cout << "pthread barrier requested" << std::endl;
         bar = new primitive::StdBar(numThreads);
     }
     else if(barRequest == "sense")
     {
+        std::cout << "sense barrier requested" << std::endl;
         bar = new primitive::SenseBar(numThreads);
     }
-    else /* berRequest == "senserel" */
+    else if(barRequest == "senserel")
     {
         // Not yet implemented
+        std::cout << "senserel barrier requested" << std::endl;
+        bar = nullptr;
+    }
+    else
+    {
+        std::cout << "Unknown barrier requested" << std::endl;
         bar = nullptr;
     }
 
@@ -57,33 +65,45 @@ primitive::Lock* Parse::selectLockType(void)
 
     if(lockRequest == "mcs")
     {
+        std::cout << "mcs lock requested" << std::endl;
         lk = new primitive::MCSLock();
     }
     else if(lockRequest == "petersonrel")
     {
         // Not yet implemented
+        std::cout << "petersonrel lock requested" << std::endl;
         lk = nullptr;
     }
     else if(lockRequest == "petersonseq")
     {
         // Not yet implemented
+        std::cout << "petersonseq lock requested" << std::endl;
         lk = nullptr;
     }
     else if(lockRequest == "pthread")
     {
+        std::cout << "pthread lock requested" << std::endl;
         lk = new primitive::MutexLock();
     }
     else if(lockRequest == "tas")
     {
+        std::cout << "TAS lock requested" << std::endl;
         lk = new primitive::TASLock();
     }
     else if(lockRequest == "ticket")
     {
+        std::cout << "Ticket lock requested" << std::endl;
         lk = new primitive::TicketLock();
     }
-    else /* lockRequest == "ttas" */
+    else if(lockRequest == "ttas")
     {
+        std::cout << "TTAS lock requested" << std::endl;
         lk = new primitive::TTASLock();
+    }
+    else
+    {
+        std::cout << "Unknown lock requested" << std::endl;
+        lk = nullptr;
     }
 
     return lk;

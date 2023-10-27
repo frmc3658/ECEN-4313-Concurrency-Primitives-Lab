@@ -4,7 +4,7 @@ namespace primitive
 {
     StdBar::StdBar()
     {
-
+        printf("Created Barrier: pthread\n");
     }
 
 
@@ -16,17 +16,22 @@ namespace primitive
 
     StdBar::~StdBar()
     {
-        delete bar;
+        if(m_bar != nullptr)
+        {
+            printf("Freed Barrier: pthread\n");
+            delete m_bar;
+        }
     }
 
 
     void StdBar::init(int numThreads)
     {
-        bar = new std::barrier<>(numThreads);
+        printf("Created Barrier: pthread\n");
+        m_bar = new std::barrier<>(numThreads);
     }
 
     void StdBar::wait(void)
     {
-        bar->arrive_and_wait();
+        m_bar->arrive_and_wait();
     }
 }

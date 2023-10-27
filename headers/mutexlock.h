@@ -8,15 +8,15 @@ namespace primitive
 {
     class MutexLock : public Lock
     {
+        private:
+            std::mutex* m_lk;
+
         public:
             MutexLock();
             virtual ~MutexLock();
 
             void lock(void) override;
             void unlock(void) override;
-
-        private:
-            std::mutex* lk;
     };
 }
 

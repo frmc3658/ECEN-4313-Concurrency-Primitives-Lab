@@ -11,12 +11,12 @@ namespace primitive
     class StdBar : public  Bar
     {
         private:
-            std::barrier<>* bar;
+            std::barrier<>* m_bar;
         
         public:
             StdBar();
             StdBar(int numThreads);
-            ~StdBar();
+            virtual ~StdBar();
 
             void init(int numThreads) override;
             void wait(void) override;

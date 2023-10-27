@@ -1,9 +1,15 @@
 #include "../headers/main.h"
 
-
-std::vector<int>* sortedValues;
+/* Global Concurrency Variables */
+int numThreads;
 primitive::Bar* bar;
 primitive::Lock* lk;
+std::vector<primitive::Lock*> locks;
+
+/* Global variables for bucketsort */
+BucketSort bucket;
+std::vector<Bucket> buckets;
+std::vector<int>* sortedValues;
 
 
 int main(int argc, char* argv[])
@@ -42,10 +48,7 @@ int main(int argc, char* argv[])
     parser.writeSortedValues();
 
     // Global cleanup
-    delete bar;
-    delete lk;
     delete sortedValues;
-    sortedValues->clear();
 
     return 0;
 }
