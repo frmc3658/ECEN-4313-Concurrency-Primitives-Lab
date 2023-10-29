@@ -5,6 +5,7 @@ files
 build
 OLD
 sorted
+ans
 
 # Prerequisites
 *.d

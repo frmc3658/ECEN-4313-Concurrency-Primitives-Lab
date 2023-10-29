@@ -17,8 +17,10 @@ namespace primitive
             printf("Freed Lock: pthread\n");
             delete m_lk;
         }
-        
-        printf("Lock Not Freed: pthread");
+        else
+        {
+            printf("Lock Not Freed: pthread\n");
+        }
     }
 
 

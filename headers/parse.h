@@ -10,7 +10,7 @@
 
 #include "primitives.h"
 
-extern std::vector<int>* sortedValues;
+extern std::vector<int>* unsortedValues;
 
 class Parse
 {

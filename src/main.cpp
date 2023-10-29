@@ -8,9 +8,7 @@ std::vector<primitive::Lock*> locks;
 
 /* Global variables for bucketsort */
 BucketSort bucket;
-std::vector<Bucket> buckets;
-std::vector<int>* sortedValues;
-
+std::vector<int>* unsortedValues;
 
 int main(int argc, char* argv[])
 {
@@ -22,12 +20,17 @@ int main(int argc, char* argv[])
     // Set global number of threads requested
     threadsRequested = parser.getNumThreads();
 
+    printf("threadsRequested: %d\n", threadsRequested);
+
     // Parse input file
-    parser.parseInputFile(sortedValues);
+    parser.parseInputFile(unsortedValues);
 
     // Select lock and barrier
     bar = parser.selectBarrierType();
     lk = parser.selectLockType();
+
+    // initialize BucketSort
+    bucket.init(unsortedValues, threadsRequested, lk, bar);
 
     // Fork
     mythread::fork();
@@ -48,7 +51,7 @@ int main(int argc, char* argv[])
     parser.writeSortedValues();
 
     // Global cleanup
-    delete sortedValues;
+    delete unsortedValues;
 
     return 0;
 }

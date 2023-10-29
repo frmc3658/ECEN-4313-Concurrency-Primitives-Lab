@@ -6,25 +6,33 @@
 #include <vector>
 
 #include "lock.h"
+#include "bar.h"
 
 typedef std::pair<int, int> Range;
-
-extern int MAIN_THREAD;
-extern std::vector<int>* sortedValues;
-extern int numThreads;
 
 class BucketSort
 {
     private:
-        std::vector<int> pool;
+        // Concurrency variables
+        int m_numThreads;
 
+        // Concurrency primitives
+        primitive::Lock* m_lk;
+        primitive::Bar* m_bar;
+
+        // Sorting variables
+        std::vector<int>* m_unsortedData;
+        std::set<int>* m_sortedData;
+
+        Range getSortRange(int threadID);
 
     public:
         BucketSort();
         ~BucketSort();
 
-        // Range getSortRange(int threadID);
-        void sort(std::vector<int>*& inputArray, std::vector<primitive::Lock*> locks, std::vector<std::vector<int>>& buckets, int numBuckets);
+        void init(std::vector<int>* unsortedData, int numThreads,
+                   primitive::Lock* lk, primitive::Bar* bar);
+        void sort(int threadID);
 };
 
 

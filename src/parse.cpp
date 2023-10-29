@@ -202,9 +202,9 @@ void Parse::writeSortedValues(void)
         {
             std::cout << "Writing Sorted Values to: " << outputPath << std::endl;
 
-            for(size_t i = 0; i < sortedValues->size(); i++)
+            for(size_t i = 0; i < unsortedValues->size(); i++)
             {
-                outFile << (*sortedValues)[i] << std::endl;
+                outFile << (*unsortedValues)[i] << std::endl;
             }
 
             std::cout << "Writing Complete!\n";
