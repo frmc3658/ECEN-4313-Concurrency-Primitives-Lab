@@ -51,8 +51,8 @@ primitive::Bar* Parse::selectBarrierType(void)
     }
     else
     {
-        std::cout << "Unknown barrier requested" << std::endl;
-        bar = nullptr;
+        std::cout << "Using default barrier" << std::endl;
+        bar = new primitive::StdBar(numThreads);
     }
 
     return bar;
@@ -102,8 +102,8 @@ primitive::Lock* Parse::selectLockType(void)
     }
     else
     {
-        std::cout << "Unknown lock requested" << std::endl;
-        lk = nullptr;
+        std::cout << "Using default lock" << std::endl;
+        lk = new primitive::MutexLock();
     }
 
     return lk;
