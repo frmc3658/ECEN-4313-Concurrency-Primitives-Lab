@@ -4,7 +4,7 @@ namespace primitive
 {
     StdBar::StdBar()
     {
-        printf("Created Barrier: pthread\n");
+        // printf("Created Barrier: pthread\n");
     }
 
 
@@ -18,7 +18,7 @@ namespace primitive
     {
         if(m_bar != nullptr)
         {
-            printf("Freed Barrier: pthread\n");
+            // printf("Freed Barrier: pthread\n");
             delete m_bar;
         }
     }
@@ -26,7 +26,7 @@ namespace primitive
 
     void StdBar::init(int numThreads)
     {
-        printf("Created Barrier: pthread\n");
+        // printf("Created Barrier: pthread\n");
         m_bar = new std::barrier<>(numThreads);
     }
 

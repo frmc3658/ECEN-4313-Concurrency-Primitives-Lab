@@ -95,7 +95,7 @@ namespace mythread
         if(threadID == MAIN_THREAD)
         {
             algTimer.setStartTime();
-            printf("Thread %d: Set the start time\n", threadID);
+            // printf("Thread %d: Set the start time\n", threadID);
         }
 
         // printf("Thread %d: Reached Barrier 2\n", threadID);
@@ -104,17 +104,17 @@ namespace mythread
         // Sort the range
         bucket.sort(threadID);
 
-        printf("Thread %d: finished\n", threadID);
+        // printf("Thread %d: finished\n", threadID);
         bar->wait();
 
         // Contents of the ranges have been sorted, sort the ranges themselves
         if(threadID == MAIN_THREAD)
         {
             algTimer.setEndTime();
-            printf("Thread %d: Set the end time\n", threadID);
+            // printf("Thread %d: Set the end time\n", threadID);
         }
 
-        printf("Thread %d Reached Barrier 4\n", threadID);
+        // printf("Thread %d Reached Barrier 4\n", threadID);
         bar->wait();
     }
 }

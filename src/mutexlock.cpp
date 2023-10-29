@@ -5,7 +5,7 @@ namespace primitive
 {
     MutexLock::MutexLock()
     {
-        printf("Created Lock: pthread\n");
+        // printf("Created Lock: pthread\n");
         m_lk = new std::mutex;
     }
 
@@ -14,12 +14,12 @@ namespace primitive
     {
         if(m_lk != nullptr)
         {
-            printf("Freed Lock: pthread\n");
+            // printf("Freed Lock: pthread\n");
             delete m_lk;
         }
         else
         {
-            printf("Lock Not Freed: pthread\n");
+            // printf("Lock Not Freed: pthread\n");
         }
     }
 

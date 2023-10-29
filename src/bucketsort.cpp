@@ -39,7 +39,7 @@ Range BucketSort::getSortRange(int threadID)
     // Encapsulate both points as a range
     Range sortRange = std::make_pair(startIndex, endIndex);
 
-    printf("Thread %d: sortRange =  [%d : %d]\n", threadID, startIndex, endIndex);
+    // printf("Thread %d: sortRange =  [%d : %d]\n", threadID, startIndex, endIndex);
 
     return sortRange;
 }
@@ -55,12 +55,12 @@ void BucketSort::sort(int threadID)
 
     if(unsortedRange.empty() || m_numThreads < 1)
     {
-        printf("Thread %d: Short circuit return\n", threadID);
+        // printf("Thread %d: Short circuit return\n", threadID);
         return;
     }
 
     int numBuckets = (unsortedRange.size() / 10) + (unsortedRange.size() % 10 ? 1 : 0);
-    printf("Thread %d: numBuckets = %d\n", threadID, numBuckets);
+    // printf("Thread %d: numBuckets = %d\n", threadID, numBuckets);
 
     // Vector of (ordered) sets
     std::vector<std::set<int>> buckets(numBuckets);

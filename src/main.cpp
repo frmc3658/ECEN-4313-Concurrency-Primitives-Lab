@@ -20,8 +20,6 @@ int main(int argc, char* argv[])
     // Set global number of threads requested
     threadsRequested = parser.getNumThreads();
 
-    printf("threadsRequested: %d\n", threadsRequested);
-
     // Parse input file
     parser.parseInputFile(unsortedValues);
 
