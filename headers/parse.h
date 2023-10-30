@@ -38,6 +38,8 @@ class Parse
 
         /* Accessor helper functions */
         int getNumThreads(void) const { return numThreads; }
+        std::string getBarRequest(void) const { return barRequest; }
+        std::string getLockRequest(void) const { return lockRequest; }
     
         /* Modifer helper functions */
         inline void setBarRequest(std::string req) { barRequest = req; }

@@ -1,11 +1,13 @@
 # Excluded files/folders
 mysort*
+counter*
 files
 .vscode
 build
 OLD
 sorted
 ans
+obj
 
 # Prerequisites
 *.d

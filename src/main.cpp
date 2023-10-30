@@ -4,7 +4,6 @@
 int numThreads;
 primitive::Bar* bar;
 primitive::Lock* lk;
-std::vector<primitive::Lock*> locks;
 
 /* Global variables for bucketsort */
 BucketSort bucket;
