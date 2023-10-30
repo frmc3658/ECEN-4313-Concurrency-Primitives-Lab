@@ -3,45 +3,45 @@ CC = g++
 CFLAGS = -Wall -Wextra -O3 -g -pthread --std=c++2a
 
 # Code Directories
-SRC_DIR = src
-HEADER_DIR = headers
+SRC_DIR 	= src
+HEADER_DIR 	= headers
 
 # Object Output Directories
-OBJ_DIR = obj
-COUNT_OBJ = $(OBJ_DIR)/counter
-MYSORT_OBJ = $(OBJ_DIR)/mysort
+OBJ_DIR 	= obj
+COUNT_OBJ 	= $(OBJ_DIR)/counter
+MYSORT_OBJ 	= $(OBJ_DIR)/mysort
 
 # Files
-MAIN_CPP = $(SRC_DIR)/main.cpp
-MAIN_H = $(HEADER_DIR)/main.h
-SRC_FILES = $(filter-out $(MAIN_CPP) $(SRC_DIR)/counter.cpp, $(wildcard $(SRC_DIR)/*.cpp))
-HEADER_FILES = $(filter-out $(MAIN_H) $(HEADER_DIR)/counter.h, $(wildcard $(HEADER_DIR)/*.h))
+MAIN_CPP 		= $(SRC_DIR)/main.cpp
+MAIN_H 			= $(HEADER_DIR)/main.h
+SRC_FILES 		= $(filter-out $(MAIN_CPP) $(SRC_DIR)/counter.cpp, $(wildcard $(SRC_DIR)/*.cpp))
+HEADER_FILES 	= $(filter-out $(MAIN_H) $(HEADER_DIR)/counter.h, $(wildcard $(HEADER_DIR)/*.h))
 
 
 # Object files
-MYSORT_OBJ_FILES = $(patsubst $(SRC_DIR)/%.cpp, $(MYSORT_OBJ)/%.o, $(SRC_FILES)) $(MAIN_CPP:$(SRC_DIR)/%.cpp=$(MYSORT_OBJ)/%.o)
-COUNT_OBJ_FILES = $(patsubst $(SRC_DIR)/%.cpp, $(COUNT_OBJ)/%.o, $(filter-out $(SRC_DIR)/main.cpp $(SRC_DIR)/counter.cpp, $(wildcard $(SRC_DIR)/*.cpp))) $(COUNT_OBJ)/counter.o
-OBJ_FILES 		= $(MYSORT_OBJ_FILES) $(COUNT_OBJ_FILES)
+MYSORT_OBJ_FILES 	= $(patsubst $(SRC_DIR)/%.cpp, $(MYSORT_OBJ)/%.o, $(SRC_FILES)) $(MAIN_CPP:$(SRC_DIR)/%.cpp=$(MYSORT_OBJ)/%.o)
+COUNT_OBJ_FILES 	= $(patsubst $(SRC_DIR)/%.cpp, $(COUNT_OBJ)/%.o, $(filter-out $(SRC_DIR)/main.cpp $(SRC_DIR)/counter.cpp, $(wildcard $(SRC_DIR)/*.cpp))) $(COUNT_OBJ)/counter.o
+OBJ_FILES 			= $(MYSORT_OBJ_FILES) $(COUNT_OBJ_FILES)
 
 # Output executables
-MYSORT_EXE = mysort
-COUNTER_EXE = counter
+MYSORT_EXE 		= mysort
+COUNTER_EXE 	= counter
 
 # Make makefile cross platform
 ifeq ($(OS), Windows_NT)
     # Windows configuration
-    RM = del /Q /F
-    RM_EXECUTABLE_EXTENSION = .exe
-    RM_OBJ_FILES = $(subst /,\,$(OBJ_FILES))
-    RMDIR = rmdir /S /Q
-    MKDIR = mkdir
+    RM 							= del /Q /F
+    RM_EXECUTABLE_EXTENSION 	= .exe
+    RM_OBJ_FILES 				= $(subst /,\,$(OBJ_FILES))
+    RMDIR 						= rmdir /S /Q
+    MKDIR 						= mkdir
 else
     # Unix configuration
-    RM = rm -f
-    RM_EXECUTABLE_EXTENSION = ""
-    RM_OBJ_FILES = $(OBJ_FILES)
-    RMDIR = rm -rf
-    MKDIR = mkdir -p
+    RM 							= rm -f
+    RM_EXECUTABLE_EXTENSION 	= ""
+    RM_OBJ_FILES 				= $(OBJ_FILES)
+    RMDIR 						= rm -rf
+    MKDIR 						= mkdir -p
 endif
 
 # Object files for mysort
