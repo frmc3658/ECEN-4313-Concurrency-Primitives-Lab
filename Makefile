@@ -46,7 +46,7 @@ endif
 
 # Object files for mysort
 
-all: $(MYSORT_EXE) $(COUNTER_EXE)
+all: $(COUNTER_EXE) $(MYSORT_EXE)
 
 #### MYSORT TARGET ####
 # Create object directory
