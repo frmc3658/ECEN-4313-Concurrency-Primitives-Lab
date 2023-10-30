@@ -36,7 +36,7 @@ for prim in "--lock=tas" "--lock=ttas" "--lock=ticket" "--lock=pthread" "--bar=s
 			read -r ITERS < $IN
 			ANS=$((ITERS*THREADS))
 			rm $MY
-			$EXEC -o $MY -t $THREADS --n $ITERS $prim
+			$EXEC -o $MY -t $THREADS -n $ITERS $prim
 			read -r MYANS < $MY
 			if [ $MYANS -eq $ANS ]
 			then 

@@ -1,37 +1,54 @@
 #include "../headers/counter.h"
 
-int numThreads;
+
+// Externally declared globals
+int NUM_THREADS;
+int NUM_ITERATIONS;
+int count;
+
+// Parser strings
+std::string barRequested;
+std::string lockRequested;
+std::string outputPath;
+
+// Concurrency primitives
 primitive::Bar* bar;
 primitive::Lock* lk;
-std::vector<int>* unsortedValues; // Not used; satisfies extern from parse.h
+
+
+std::vector<int>* unsortedValues= nullptr; // NOT USED; CLEARS UP EXTERN ERROR FROM PARSER.H
+
 
 int main(int argc, char* argv[])
 {
-    Parse parser;
-    parser.validateArgc(argc);
-    parser.parseCMD(argc, argv);
+    // Validate argument count
+    counter::validateArgc(argc);
 
-
-    std::string barRequested = parser.getBarRequest();
-    std::string lockRequested = parser.getLockRequest();
+    // Parse the command line arguments
+    counter::parseCMD(argc, argv);
 
     // Either a lock or a barrier can be requested; not both
-    if((barRequested != "") && (lockRequested != ""))
-    {
-        std::cout << "Invalid input: Both Lock and Barrier requested\n";
-        return -2;
-    }
-
-    numThreads = parser.getNumThreads();
+    counter::validateBarOrLock();
     
+    // Set Lock or Barrier
     if(barRequested != "")
     {
-        bar = parser.selectBarrierType();
+        std::cout << "Getting Barrier Class\n";
+        bar = counter::getBarClass();
     }
     else if(lockRequested != "")
     {
-        lk = parser.selectLockType();
+        std::cout << "Getting Lock Class\n";
+        lk = counter::getLockClass();
     }
+
+    counter::fork();
+    counter::threadMain(MAIN_THREAD);
+    counter::join();
+    counter::cleanup();
+
+    algTimer.printRuntime();
+    counter::writeCounter();
 
     return 0;
 }
