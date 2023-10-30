@@ -1,6 +1,6 @@
 # Excluded files/folders
-mysort*
-counter*
+mysort
+counter
 files
 .vscode
 build
