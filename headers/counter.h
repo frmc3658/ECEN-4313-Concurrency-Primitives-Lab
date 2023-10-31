@@ -225,13 +225,13 @@ namespace counter
 
         if(barRequested != "")
         {
-            printf("Calling thread_main_barrier");
-            // thread_main_barrier(threadID);
+            // printf("Calling thread_main_barrier");
+            thread_main_barrier(threadID);
         }
         else if(lockRequested != "") 
         {
-            printf("Calling thread_main_lock");
-            // thread_main_lock();
+            // printf("Calling thread_main_lock");
+            thread_main_lock();
         }
 
         // Should have a barrier here
