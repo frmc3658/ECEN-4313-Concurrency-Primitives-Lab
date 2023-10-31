@@ -29,7 +29,7 @@ void Timer::printRuntime(void)
     calculateRuntime();
 
     // Print runtime
-    std::cout << "BucketSort Complete:\n";
+    std::cout << "Printing Runtime:\n";
     std::cout << "Runtime: " << getRuntimeNS() << "ns\n";
     std::cout << "Runtime: " << getRuntimeSec() << "sec\n";
 }

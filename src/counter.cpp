@@ -33,12 +33,12 @@ int main(int argc, char* argv[])
     // Set Lock or Barrier
     if(barRequested != "")
     {
-        std::cout << "Getting Barrier Class\n";
+        // std::cout << "Getting Barrier Class\n";
         bar = counter::getBarClass();
     }
     else if(lockRequested != "")
     {
-        std::cout << "Getting Lock Class\n";
+        // std::cout << "Getting Lock Class\n";
         lk = counter::getLockClass();
     }
 

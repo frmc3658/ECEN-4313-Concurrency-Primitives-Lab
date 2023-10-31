@@ -59,27 +59,27 @@ namespace counter
                 case 'b':
                     // Barrier Requested
                     barRequested = (std::string)optarg;
-                    printf("Barrier Requested: %s\n", barRequested.c_str());
+                    // printf("Barrier Requested: %s\n", barRequested.c_str());
                     break;
                 case 'l':
                     // Lock Requested
                     lockRequested = (std::string)optarg;
-                    printf("Lock Requested: %s\n", lockRequested.c_str());
+                    // printf("Lock Requested: %s\n", lockRequested.c_str());
                     break;
                 case 'o':
                     // Output File Path
                     outputPath = (std::string)optarg;
-                    printf("Output Path: %s\n", outputPath.c_str());
+                    // printf("Output Path: %s\n", outputPath.c_str());
                     break;
                 case 't':
                     // Number of Threads Requested
                     NUM_THREADS = std::stoi(optarg);
-                    printf("Num Threads Requested: %d\n", NUM_THREADS);
+                    // printf("Num Threads Requested: %d\n", NUM_THREADS);
                     break;
                 case 'n':
                     // Number of Iterations Requested
                     NUM_ITERATIONS = std::stoi(optarg);
-                    printf("Num Iterations Requested: %d\n", NUM_ITERATIONS);
+                    // printf("Num Iterations Requested: %d\n", NUM_ITERATIONS);
                     break;
                 case 'a':
                     // Print Name
@@ -115,44 +115,44 @@ namespace counter
     {
         if(lockRequested == "mcs")
         {
-            std::cout << "mcs lock requested" << std::endl;
+            // std::cout << "mcs lock requested" << std::endl;
             lk = new primitive::MCSLock();
         }
         else if(lockRequested == "petersonrel")
         {
             // Not yet implemented
-            std::cout << "petersonrel lock requested" << std::endl;
+            // std::cout << "petersonrel lock requested" << std::endl;
             lk = nullptr;
         }
         else if(lockRequested == "petersonseq")
         {
             // Not yet implemented
-            std::cout << "petersonseq lock requested" << std::endl;
+            // std::cout << "petersonseq lock requested" << std::endl;
             lk = nullptr;
         }
         else if(lockRequested == "pthread")
         {
-            std::cout << "pthread lock requested" << std::endl;
+            // std::cout << "pthread lock requested" << std::endl;
             lk = new primitive::MutexLock();
         }
         else if(lockRequested == "tas")
         {
-            std::cout << "TAS lock requested" << std::endl;
+            // std::cout << "TAS lock requested" << std::endl;
             lk = new primitive::TASLock();
         }
         else if(lockRequested == "ticket")
         {
-            std::cout << "Ticket lock requested" << std::endl;
+            // std::cout << "Ticket lock requested" << std::endl;
             lk = new primitive::TicketLock();
         }
         else if(lockRequested == "ttas")
         {
-            std::cout << "TTAS lock requested" << std::endl;
+            // std::cout << "TTAS lock requested" << std::endl;
             lk = new primitive::TTASLock();
         }
         else
         {
-            std::cout << "Using default lock" << std::endl;
+            // std::cout << "Using default lock" << std::endl;
             lk = new primitive::MutexLock();
         }
 
@@ -164,23 +164,23 @@ namespace counter
     {
         if(barRequested == "pthread")
         {
-            std::cout << "pthread barrier requested" << std::endl;
+            // std::cout << "pthread barrier requested" << std::endl;
             bar = new primitive::StdBar(NUM_THREADS);
         }
         else if(barRequested == "sense")
         {
-            std::cout << "sense barrier requested" << std::endl;
+            // std::cout << "sense barrier requested" << std::endl;
             bar = new primitive::SenseBar(NUM_THREADS);
         }
         else if(barRequested == "senserel")
         {
             // Not yet implemented
-            std::cout << "senserel barrier requested" << std::endl;
+            // std::cout << "senserel barrier requested" << std::endl;
             bar = nullptr;
         }
         else
         {
-            std::cout << "Using default barrier" << std::endl;
+            // std::cout << "Using default barrier" << std::endl;
             bar = new primitive::StdBar(NUM_THREADS);
         }
 
@@ -218,7 +218,7 @@ namespace counter
         if(threadID == 0)
         {
             algTimer.setStartTime();
-            printf("Thread %d: Set the start time\n", threadID);
+            // printf("Thread %d: Set the start time\n", threadID);
         }
 
         // Should have a barrier here
@@ -226,12 +226,12 @@ namespace counter
         if(barRequested != "")
         {
             printf("Calling thread_main_barrier");
-            thread_main_barrier(threadID);
+            // thread_main_barrier(threadID);
         }
         else if(lockRequested != "") 
         {
             printf("Calling thread_main_lock");
-            thread_main_lock();
+            // thread_main_lock();
         }
 
         // Should have a barrier here
@@ -240,7 +240,7 @@ namespace counter
         if(threadID == 0)
         {
             algTimer.setEndTime();
-            printf("Thread %d: Set the end time\n", threadID);
+            // printf("Thread %d: Set the end time\n", threadID);
         }
     }
 
@@ -252,7 +252,7 @@ namespace counter
 
         for(int threadIdx = 0; threadIdx < NUM_THREADS - 1; threadIdx++)
         {
-            std::cout << "Created Thread: " << threadIdx << std::endl;
+            // std::cout << "Created Thread: " << threadIdx << std::endl;
             workers[threadIdx] = new std::thread(threadMain, threadIdx);
         }
     }
@@ -262,7 +262,7 @@ namespace counter
     {
         for(int i = 0; i < NUM_THREADS - 1; i++)
         {
-            std::cout << "Joined Thread: " << i << std::endl;
+            // std::cout << "Joined Thread: " << i << std::endl;
             workers[i]->join();
         }
     }
@@ -275,7 +275,7 @@ namespace counter
 
         for(int i = 0; i < NUM_THREADS - 1; i++)
         {
-            std::cout << "Deleted Thread: " << i << std::endl;
+            // std::cout << "Deleted Thread: " << i << std::endl;
             delete workers[i];
         }
     }
